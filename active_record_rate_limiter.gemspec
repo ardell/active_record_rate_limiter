@@ -9,15 +9,18 @@ Gem::Specification.new do |s|
   s.version     = ActiveRecordRateLimiter::VERSION
   s.authors     = ["Jason Ardell"]
   s.email       = ["ardell@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ActiveRecordRateLimiter."
-  s.description = "TODO: Description of ActiveRecordRateLimiter."
+  s.homepage    = "https://github.com/ardell/active_record_rate_limiter"
+  s.summary     = "A simple rate limiter backed by ActiveRecord."
+  s.description = ""
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 4.2.6"
+  s.add_dependency "with_advisory_lock", "~> 3.0.0"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "rspec"
 end
+
