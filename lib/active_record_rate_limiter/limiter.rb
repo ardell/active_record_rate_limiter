@@ -36,7 +36,7 @@ module ActiveRecordRateLimiter
       # Delete old events
       ActiveRecordRateLimiter::Models::RateLimitedEvent
         .where('created_at < ?', 7.days.ago)
-        .destroy_all
+        .delete_all
 
       # Lock the db table so we don't get race conditions
       lock_name = 'ActiveRecordRateLimiter'
