@@ -82,6 +82,9 @@ RSpec.describe ActiveRecordRateLimiter::Limiter do
         created_at: 10.days.ago,
       })
 
+      allow(ActiveRecordRateLimiter::Limiter)
+        .to receive(:_should_delete_old_events)
+        .and_return(true)
       limiter.track
       actual = ActiveRecordRateLimiter::Models::RateLimitedEvent.exists?(old_event.id)
       expect(actual).to be_falsy

@@ -34,9 +34,11 @@ module ActiveRecordRateLimiter
       raise EventTypeNotSetError unless @_event_type
 
       # Delete old events
-      ActiveRecordRateLimiter::Models::RateLimitedEvent
-        .where('created_at < ?', 7.days.ago)
-        .delete_all
+      if _should_delete_old_events
+        ActiveRecordRateLimiter::Models::RateLimitedEvent
+          .where('created_at < ?', 7.days.ago)
+          .delete_all
+      end
 
       # Lock the db table so we don't get race conditions
       lock_name = 'ActiveRecordRateLimiter'
@@ -71,6 +73,11 @@ module ActiveRecordRateLimiter
 
     def self.sleep
       Kernel.sleep(0.1)
+    end
+
+    # NOTE: only public for testing
+    def self._should_delete_old_events
+      rand(0..1000) == 0
     end
 
     # NOTE: only public for testing
