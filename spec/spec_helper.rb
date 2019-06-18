@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'tmpdir'
 Bundler.setup
 
 # Set up a test database
