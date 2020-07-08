@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    active_record_rate_limiter (0.1.0)
+    active_record_rate_limiter (0.1.1)
       rails (>= 5.0.0)
       with_advisory_lock (~> 4.0.0)
 
@@ -156,6 +156,9 @@ DEPENDENCIES
   active_record_rate_limiter!
   rspec
   sqlite3 (~> 1.4)
+
+RUBY VERSION
+   ruby 2.6.5p114
 
 BUNDLED WITH
    2.1.4
