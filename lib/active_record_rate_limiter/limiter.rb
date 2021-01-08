@@ -30,6 +30,8 @@ module ActiveRecordRateLimiter
       ]
     end
 
+    # Check whether we're limited, wait if necessary, then record that the
+    # thing happened.
     def self.track
       raise EventTypeNotSetError unless @_event_type
 
@@ -49,10 +51,17 @@ module ActiveRecordRateLimiter
         end
 
         # Save the new event
-        ActiveRecordRateLimiter::Models::RateLimitedEvent.create({
-          event_type: @_event_type
-        })
+        self.increment
       end
+    end
+
+    # Blindly increment the count of things that happened. This is useful if
+    # you are using `.limited?` independently of `.track`, i.e. when `on_limit`
+    # is a no-op.
+    def self.increment
+      ActiveRecordRateLimiter::Models::RateLimitedEvent.create({
+        event_type: @_event_type
+      })
     end
 
     def self.limited?

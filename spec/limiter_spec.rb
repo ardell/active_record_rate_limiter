@@ -70,10 +70,9 @@ RSpec.describe ActiveRecordRateLimiter::Limiter do
         .to raise_error(ActiveRecordRateLimiter::EventTypeNotSetError)
     end
 
-    it 'adds a new record to the rate_limited_events table' do
-      expect { limiter.track }.to change {
-        ActiveRecordRateLimiter::Models::RateLimitedEvent.count
-      }.by(1)
+    it 'increments the count of events' do
+      expect(limiter).to receive(:increment)
+      limiter.track
     end
 
     it 'deletes a rate_limited_events record older than 7 days' do
@@ -115,6 +114,14 @@ RSpec.describe ActiveRecordRateLimiter::Limiter do
       limiter.limit 1, since: proc { 1.second.ago }, on_limit: :custom_on_limit_handler
 
       limiter.track
+    end
+  end
+
+  describe 'self.increment' do
+    it 'adds a new record to the rate_limited_events table' do
+      expect { limiter.increment }.to change {
+        ActiveRecordRateLimiter::Models::RateLimitedEvent.count
+      }.by(1)
     end
   end
 
