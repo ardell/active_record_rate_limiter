@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    active_record_rate_limiter (0.2.3)
-      rails (>= 5.0.0)
+    active_record_rate_limiter (0.3.0)
+      rails (>= 5, < 7)
       with_advisory_lock (~> 4.0.0)
 
 GEM
@@ -150,7 +150,7 @@ GEM
     websocket-extensions (0.1.5)
     with_advisory_lock (4.0.0)
       activerecord (>= 4.2)
-    zeitwerk (2.5.1)
+    zeitwerk (2.5.2)
 
 PLATFORMS
   ruby
