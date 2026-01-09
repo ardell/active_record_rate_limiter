@@ -42,15 +42,15 @@ module ActiveRecordRateLimiter
           .delete_all
       end
 
-      # Lock the db table so we don't get race conditions
       lock_name = "ActiveRecordRateLimiter:#{@_event_type}"
-      ActiveRecordRateLimiter::Models::RateLimitedEvent.with_advisory_lock(lock_name) do
-        # If we're limited, call on_limit handler
-        while (on_limit_handler = limited?)
-          self.send(on_limit_handler)
-        end
+      # Wait outside the lock if we're rate limited
+      while (on_limit_handler = limited?)
+        self.send(on_limit_handler)
+      end
 
-        # Save the new event
+      # Only lock for the critical section: final check + insert
+      ActiveRecordRateLimiter::Models::RateLimitedEvent.with_advisory_lock(lock_name) do
+        return if limited?
         self.increment
       end
     end
