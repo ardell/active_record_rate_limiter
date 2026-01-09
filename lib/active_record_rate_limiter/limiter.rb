@@ -43,7 +43,7 @@ module ActiveRecordRateLimiter
       end
 
       # Lock the db table so we don't get race conditions
-      lock_name = 'ActiveRecordRateLimiter'
+      lock_name = "ActiveRecordRateLimiter:#{@_event_type}"
       ActiveRecordRateLimiter::Models::RateLimitedEvent.with_advisory_lock(lock_name) do
         # If we're limited, call on_limit handler
         while (on_limit_handler = limited?)
