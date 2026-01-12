@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '3.2.4'
+ruby '3.4.8'
 
 # Declare your gem's dependencies in active_record_rate_limiter.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
