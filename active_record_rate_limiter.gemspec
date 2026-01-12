@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
   s.add_dependency "with_advisory_lock", "~> 4.0.0"
 
   s.add_development_dependency "sqlite3", "~> 2.4"
-  s.add_development_dependency "rspec"
+  s.add_development_dependency "rspec", "~> 3.13"
 end
 
