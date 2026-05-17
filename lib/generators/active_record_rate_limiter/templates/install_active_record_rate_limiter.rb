@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class InstallActiveRecordRateLimiter < ActiveRecord::Migration
+class InstallActiveRecordRateLimiter < ActiveRecord::Migration[7.1]
 
   def change
     create_table :rate_limited_events do |t|
