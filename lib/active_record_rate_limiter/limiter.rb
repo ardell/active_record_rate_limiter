@@ -1,3 +1,4 @@
+require 'active_support/core_ext/numeric/time'
 require 'active_record_rate_limiter/models/rate_limited_event'
 require 'with_advisory_lock'
 
