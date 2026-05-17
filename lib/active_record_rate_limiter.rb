@@ -1,5 +1,3 @@
-require 'rails'
-
 module ActiveRecordRateLimiter
 end
 
